@@ -11,10 +11,10 @@ export class CreateRoleDto {
   name: string;
 
   @ApiProperty({
-    example: ['users.create', 'users.read', 'users.update', 'users.delete'],
-    description: 'List of permissions assigned to the role',
+    example: JSON.stringify(['users.create', 'users.read', 'users.update', 'users.delete']),
+    description: 'JSON string of permissions assigned to the role',
   })
-  @IsArray()
+  @IsString()
   @IsOptional()
-  permissions?: string[];
+  permissions?: string;
 }

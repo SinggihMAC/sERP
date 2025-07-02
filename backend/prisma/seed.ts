@@ -10,7 +10,7 @@ async function main() {
     update: {},
     create: {
       name: 'Admin',
-      permissions: [
+      permissions: JSON.stringify([
         'user:read',
         'user:create',
         'user:update',
@@ -20,7 +20,7 @@ async function main() {
         'role:update',
         'role:delete',
         'admin:access'
-      ],
+      ]),
     },
   });
 
@@ -29,10 +29,10 @@ async function main() {
     update: {},
     create: {
       name: 'User',
-      permissions: [
+      permissions: JSON.stringify([
         'user:read',
         'user:update:own',
-      ],
+      ]),
     },
   });
 

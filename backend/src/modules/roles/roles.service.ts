@@ -8,8 +8,12 @@ export class RolesService {
   constructor(private prisma: PrismaService) {}
 
   async create(createRoleDto: CreateRoleDto) {
+    // permissions sudah dalam bentuk string sesuai dengan schema
     return this.prisma.role.create({
-      data: createRoleDto,
+      data: {
+        name: createRoleDto.name,
+        permissions: createRoleDto.permissions || '',
+      },
     });
   }
 
@@ -31,9 +35,20 @@ export class RolesService {
 
   async update(id: number, updateRoleDto: UpdateRoleDto) {
     try {
+      // permissions sudah dalam bentuk string sesuai dengan schema
+      const updateData: any = {};
+      
+      if (updateRoleDto.name !== undefined) {
+        updateData.name = updateRoleDto.name;
+      }
+      
+      if (updateRoleDto.permissions !== undefined) {
+        updateData.permissions = updateRoleDto.permissions;
+      }
+      
       return await this.prisma.role.update({
         where: { id },
-        data: updateRoleDto,
+        data: updateData,
       });
     } catch (error) {
       throw new NotFoundException(`Role with ID ${id} not found`);
