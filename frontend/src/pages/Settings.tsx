@@ -395,15 +395,24 @@ function Settings() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Theme</label>
                     <div className="mt-4 grid grid-cols-3 gap-4">
-                      <div className="border rounded-md p-4 flex flex-col items-center space-y-2 cursor-pointer bg-white shadow-sm hover:border-blue-500">
+                      <div 
+                        className={`border rounded-md p-4 flex flex-col items-center space-y-2 cursor-pointer ${appearanceSettings.theme === 'light' ? 'bg-white shadow-sm ring-2 ring-blue-500' : 'bg-white shadow-sm hover:border-blue-500'}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, theme: 'light'})}
+                      >
                         <div className="w-full h-10 bg-white border border-gray-200 rounded-md"></div>
                         <div className="text-sm font-medium">Light</div>
                       </div>
-                      <div className="border rounded-md p-4 flex flex-col items-center space-y-2 cursor-pointer bg-gray-100 hover:border-blue-500">
+                      <div 
+                        className={`border rounded-md p-4 flex flex-col items-center space-y-2 cursor-pointer ${appearanceSettings.theme === 'dark' ? 'bg-gray-100 ring-2 ring-blue-500' : 'bg-gray-100 hover:border-blue-500'}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, theme: 'dark'})}
+                      >
                         <div className="w-full h-10 bg-gray-800 rounded-md"></div>
                         <div className="text-sm font-medium">Dark</div>
                       </div>
-                      <div className="border rounded-md p-4 flex flex-col items-center space-y-2 cursor-pointer bg-gray-100 hover:border-blue-500">
+                      <div 
+                        className={`border rounded-md p-4 flex flex-col items-center space-y-2 cursor-pointer ${appearanceSettings.theme === 'custom' ? 'bg-gray-100 ring-2 ring-blue-500' : 'bg-gray-100 hover:border-blue-500'}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, theme: 'custom'})}
+                      >
                         <div className="w-full h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-md"></div>
                         <div className="text-sm font-medium">Custom</div>
                       </div>
@@ -413,12 +422,30 @@ function Settings() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Accent Color</label>
                     <div className="mt-4 grid grid-cols-6 gap-4">
-                      <div className="h-8 w-8 bg-blue-500 rounded-full cursor-pointer ring-2 ring-offset-2 ring-blue-500"></div>
-                      <div className="h-8 w-8 bg-green-500 rounded-full cursor-pointer"></div>
-                      <div className="h-8 w-8 bg-red-500 rounded-full cursor-pointer"></div>
-                      <div className="h-8 w-8 bg-purple-500 rounded-full cursor-pointer"></div>
-                      <div className="h-8 w-8 bg-yellow-500 rounded-full cursor-pointer"></div>
-                      <div className="h-8 w-8 bg-pink-500 rounded-full cursor-pointer"></div>
+                      <div 
+                        className={`h-8 w-8 bg-blue-500 rounded-full cursor-pointer ${appearanceSettings.accentColor === 'blue' ? 'ring-2 ring-offset-2 ring-blue-500' : ''}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, accentColor: 'blue'})}
+                      ></div>
+                      <div 
+                        className={`h-8 w-8 bg-green-500 rounded-full cursor-pointer ${appearanceSettings.accentColor === 'green' ? 'ring-2 ring-offset-2 ring-green-500' : ''}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, accentColor: 'green'})}
+                      ></div>
+                      <div 
+                        className={`h-8 w-8 bg-red-500 rounded-full cursor-pointer ${appearanceSettings.accentColor === 'red' ? 'ring-2 ring-offset-2 ring-red-500' : ''}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, accentColor: 'red'})}
+                      ></div>
+                      <div 
+                        className={`h-8 w-8 bg-purple-500 rounded-full cursor-pointer ${appearanceSettings.accentColor === 'purple' ? 'ring-2 ring-offset-2 ring-purple-500' : ''}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, accentColor: 'purple'})}
+                      ></div>
+                      <div 
+                        className={`h-8 w-8 bg-yellow-500 rounded-full cursor-pointer ${appearanceSettings.accentColor === 'yellow' ? 'ring-2 ring-offset-2 ring-yellow-500' : ''}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, accentColor: 'yellow'})}
+                      ></div>
+                      <div 
+                        className={`h-8 w-8 bg-pink-500 rounded-full cursor-pointer ${appearanceSettings.accentColor === 'pink' ? 'ring-2 ring-offset-2 ring-pink-500' : ''}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, accentColor: 'pink'})}
+                      ></div>
                     </div>
                   </div>
 
@@ -429,10 +456,12 @@ function Settings() {
                         id="font-size"
                         name="font-size"
                         className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        value={appearanceSettings.fontSize}
+                        onChange={(e) => setAppearanceSettings({...appearanceSettings, fontSize: e.target.value})}
                       >
-                        <option>Small</option>
-                        <option selected>Medium</option>
-                        <option>Large</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
                       </select>
                     </div>
                   </div>
@@ -440,14 +469,20 @@ function Settings() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Sidebar Position</label>
                     <div className="mt-4 grid grid-cols-2 gap-4">
-                      <div className="border rounded-md p-4 flex flex-col items-center space-y-2 cursor-pointer bg-white shadow-sm hover:border-blue-500">
+                      <div 
+                        className={`border rounded-md p-4 flex flex-col items-center space-y-2 cursor-pointer ${appearanceSettings.sidebarPosition === 'left' ? 'bg-white shadow-sm ring-2 ring-blue-500' : 'bg-white shadow-sm hover:border-blue-500'}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, sidebarPosition: 'left'})}
+                      >
                         <div className="w-full h-20 flex">
                           <div className="w-1/4 bg-gray-200 h-full"></div>
                           <div className="w-3/4 bg-white h-full"></div>
                         </div>
                         <div className="text-sm font-medium">Left</div>
                       </div>
-                      <div className="border rounded-md p-4 flex flex-col items-center space-y-2 cursor-pointer bg-gray-100 hover:border-blue-500">
+                      <div 
+                        className={`border rounded-md p-4 flex flex-col items-center space-y-2 cursor-pointer ${appearanceSettings.sidebarPosition === 'right' ? 'bg-gray-100 ring-2 ring-blue-500' : 'bg-gray-100 hover:border-blue-500'}`}
+                        onClick={() => setAppearanceSettings({...appearanceSettings, sidebarPosition: 'right'})}
+                      >
                         <div className="w-full h-20 flex">
                           <div className="w-3/4 bg-white h-full"></div>
                           <div className="w-1/4 bg-gray-200 h-full"></div>
